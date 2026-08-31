@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jfabe.github.io/eeva-finpol-link/sitemap.xml
