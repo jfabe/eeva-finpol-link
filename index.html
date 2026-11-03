@@ -14,49 +14,55 @@
 <meta property="og:locale:alternate" content="pl_PL">
 <meta property="og:locale:alternate" content="en_US">
 <meta name="robots" content="index, follow">
+<meta name="theme-color" content="#163A69">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231F4E8C'/%3E%3Crect x='11' y='4' width='5' height='24' fill='%23FBF3E4'/%3E%3Crect x='11' y='13' width='18' height='5' fill='%23FBF3E4'/%3E%3Crect y='28' width='32' height='4' fill='%23C23B2C'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
   :root{
     --paper:#FBF3E4;
     --paper-dim:#F4E6CC;
     --card:#FFFCF6;
     --ink:#2B2117;
+    --ink-2:#4B4133;
+    --ink-3:#6B5E4B;
     --blue:#1F4E8C;
     --blue-deep:#163A69;
     --blue-soft:#5A7FAE;
     --red:#C23B2C;
     --red-soft:#DE7B67;
     --gold:#D9A441;
+    --gold-ink:#8a651f;
     --line: rgba(43,33,23,0.12);
+    --shadow: 0 1px 2px rgba(43,33,23,0.05), 0 8px 24px -12px rgba(43,33,23,0.18);
+    --max:1080px;
   }
   *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth; scroll-padding-top:72px;}
   body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'IBM Plex Sans', sans-serif;
-    -webkit-font-smoothing:antialiased;
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:'IBM Plex Sans', system-ui, sans-serif;
+    -webkit-font-smoothing:antialiased; line-height:1.6;
   }
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
     *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
   }
   .eyebrow{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:11px;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--red);
+    display:inline-block;
+    font-family:'IBM Plex Mono', monospace; font-size:11px;
+    letter-spacing:0.14em; text-transform:uppercase; color:var(--red);
   }
   .eyebrow.blue{color:var(--blue);}
-  h1,h2,h3{font-family:'Fraunces', serif; font-weight:500; margin:0; line-height:1.08;}
+  h1,h2,h3{font-family:'Fraunces', Georgia, serif; font-weight:500; margin:0; line-height:1.08;}
   a{color:inherit;}
   button{font-family:inherit;}
+  :focus-visible{outline:2px solid var(--blue); outline-offset:3px;}
 
-  /* ribbon divider — the two flag colors, woven */
+  .wrap{max-width:var(--max); margin:0 auto;}
+
+  /* ribbon divider — the two flag colors */
   .ribbon{height:5px; width:100%; display:flex;}
   .ribbon span{flex:1;}
   .ribbon .b{background:var(--blue);}
@@ -69,62 +75,97 @@
   .mark .v{position:absolute; top:2px; bottom:2px; left:8px; width:4px; background:var(--paper);}
   .mark .bar{position:absolute; left:0; right:0; bottom:-4px; height:3px; background:var(--red); border-radius:2px;}
 
+  /* ===== TOP BAR ===== */
   .topbar{
     position:sticky; top:0; z-index:50;
-    display:flex; align-items:center; justify-content:space-between;
-    padding:16px 28px;
-    background:var(--paper);
+    background:rgba(251,243,228,0.92);
+    -webkit-backdrop-filter:saturate(1.4) blur(8px); backdrop-filter:saturate(1.4) blur(8px);
     border-bottom:1px solid var(--line);
   }
-  .brand{font-family:'Fraunces', serif; font-weight:600; font-size:17px; display:flex; align-items:center; gap:10px;}
+  .topbar-inner{max-width:var(--max); margin:0 auto; padding:14px 28px; display:flex; align-items:center; justify-content:space-between; gap:16px;}
+  .brand{font-family:'Fraunces', serif; font-weight:600; font-size:17px; display:flex; align-items:center; gap:10px; text-decoration:none;}
+  .nav{display:flex; gap:22px; font-size:14px;}
+  .nav a{text-decoration:none; color:var(--ink-2); padding:4px 0; border-bottom:1.5px solid transparent;}
+  .nav a:hover{color:var(--ink); border-bottom-color:var(--red);}
+  .nav [data-lang-block].active{display:flex; gap:22px;}
+  @media (max-width:860px){ .nav{display:none !important;} }
   .lang-switch{display:flex; gap:6px;}
   .stamp{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:11px; letter-spacing:0.06em;
-    border:1.5px solid var(--ink);
-    background:var(--card); color:var(--ink);
-    padding:6px 12px; border-radius:3px; cursor:pointer;
-    transition:all .15s ease;
+    font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.06em;
+    border:1.5px solid var(--ink); background:var(--card); color:var(--ink);
+    padding:6px 12px; border-radius:3px; cursor:pointer; transition:all .15s ease;
   }
   .stamp[data-lang="fi"]{border-color:var(--blue); color:var(--blue-deep);}
   .stamp[data-lang="pl"]{border-color:var(--red); color:var(--red);}
-  .stamp[data-lang="en"]{border-color:var(--gold); color:#8a651f;}
+  .stamp[data-lang="en"]{border-color:var(--gold); color:var(--gold-ink);}
   .stamp.active[data-lang="fi"]{background:var(--blue); color:#fff;}
   .stamp.active[data-lang="pl"]{background:var(--red); color:#fff;}
   .stamp.active[data-lang="en"]{background:var(--gold); color:#fff;}
 
+  /* ===== BUTTONS ===== */
+  .cta-row{margin-top:30px; display:flex; gap:12px; flex-wrap:wrap;}
+  .btn-primary, .btn-ghost, .btn-whatsapp{
+    display:inline-flex; align-items:center; gap:10px; text-decoration:none;
+    font-size:14.5px; border-radius:4px; cursor:pointer; transition:background .15s ease, transform .15s ease;
+  }
+  .btn-primary{background:var(--blue); color:#fff; border:none; font-weight:600; padding:13px 26px;}
+  .btn-primary:hover{background:var(--blue-deep); transform:translateY(-1px);}
+  .btn-ghost{background:transparent; border:1.5px solid var(--red); color:var(--red); padding:12px 24px; font-weight:500;}
+  .btn-ghost:hover{background:rgba(194,59,44,0.08);}
+  .btn-whatsapp{background:#25D366; color:#0b2b16; font-weight:600; padding:12px 22px 12px 16px;}
+  .btn-whatsapp:hover{background:#1EBE5B; transform:translateY(-1px);}
+  .btn-whatsapp svg{width:20px; height:20px; flex:none;}
+
   /* ===== HERO ===== */
   .hero{
     background:
-      radial-gradient(circle at 12% 18%, rgba(31,78,140,0.10), transparent 45%),
-      radial-gradient(circle at 88% 82%, rgba(194,59,44,0.12), transparent 45%),
+      radial-gradient(circle at 8% 15%, rgba(31,78,140,0.12), transparent 42%),
+      radial-gradient(circle at 92% 85%, rgba(194,59,44,0.12), transparent 42%),
       var(--paper);
-    padding:64px 28px 0;
+    padding:72px 28px 0;
   }
-  .hero-inner{max-width:720px; margin:0 auto;}
-  .hero .brandmark{display:flex; align-items:center; gap:12px; margin-bottom:24px;}
-  .hero h1{font-size:clamp(34px,7vw,56px); letter-spacing:-0.01em;}
-  .hero p.sub{font-size:16px; line-height:1.65; color:#4B4133; max-width:540px; margin-top:20px;}
-  .cta-row{margin-top:30px; display:flex; gap:14px; flex-wrap:wrap;}
-  .btn-primary{
-    background:var(--blue); color:#fff; border:none; font-weight:600; font-size:14.5px;
-    padding:13px 26px; border-radius:3px; cursor:pointer;
+  .hero-grid{display:grid; grid-template-columns:1.25fr 0.9fr; gap:56px; align-items:center;}
+  @media (max-width:860px){ .hero-grid{grid-template-columns:1fr; gap:36px;} .hero{padding-top:48px;} }
+  .hero h1{font-size:clamp(38px,6.4vw,68px); letter-spacing:-0.015em; margin-top:16px;}
+  .hero h1 em{font-style:italic; color:var(--blue);}
+  .hero h1 em.r{color:var(--red);}
+  .hero p.sub{font-size:17px; line-height:1.65; color:var(--ink-2); max-width:540px; margin:22px 0 0;}
+  .hero .ribbon{margin-top:72px;}
+  @media (max-width:860px){ .hero .ribbon{margin-top:48px;} }
+
+  /* boarding-pass style fact card */
+  .pass{
+    background:var(--card); border-radius:10px; box-shadow:var(--shadow);
+    border:1px solid var(--line); overflow:hidden; position:relative;
   }
-  .btn-primary:hover{background:var(--blue-deep);}
-  .btn-ghost{
-    background:transparent; border:1.5px solid var(--red); color:var(--red);
-    font-size:14.5px; padding:12px 24px; border-radius:3px; cursor:pointer; font-weight:500;
+  .pass-head{display:flex; align-items:center; justify-content:space-between; padding:18px 22px; background:var(--blue-deep); color:#FFF8EA;}
+  .pass-head .route{font-family:'Fraunces', serif; font-size:30px; letter-spacing:0.02em; display:flex; align-items:center; gap:14px;}
+  .pass-head .route .arrow{font-size:18px; color:var(--gold);}
+  .pass-head .tag{font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:0.12em; text-transform:uppercase; color:#F2C9A8;}
+  .pass-body{padding:6px 22px 8px;}
+  .pass-row{display:grid; grid-template-columns:110px 1fr; gap:14px; padding:13px 0; border-bottom:1px dashed var(--line);}
+  .pass-row:last-child{border-bottom:none;}
+  .pass-row dt{font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-3); padding-top:3px;}
+  .pass-row dd{margin:0; font-size:14.5px; color:var(--ink); font-weight:500; line-height:1.45;}
+  .pass-foot{display:flex; justify-content:space-between; align-items:center; padding:12px 22px; border-top:2px dashed var(--line); background:var(--paper);}
+  .pass-foot .name{font-family:'Fraunces', serif; font-size:16px;}
+  .bars{display:flex; gap:2px; height:22px; align-items:stretch;}
+  .bars i{display:block; width:2px; background:var(--ink); opacity:.75;}
+  .bars i:nth-child(3n){width:3px;} .bars i:nth-child(4n){width:1px;}
+  .pass::before, .pass::after{
+    content:''; position:absolute; width:18px; height:18px; border-radius:50%;
+    background:var(--paper); bottom:44px; border:1px solid var(--line);
   }
-  .btn-ghost:hover{background:rgba(194,59,44,0.08);}
-  .hero .ribbon{margin-top:56px;}
+  .pass::before{left:-10px;} .pass::after{right:-10px;}
 
   /* ===== SECTIONS ===== */
-  section.block{padding:64px 28px;}
-  .wrap{max-width:720px; margin:0 auto;}
-  .block .eyebrow{margin-bottom:10px;}
-  .block h2{font-size:clamp(26px,4.5vw,34px); margin-bottom:22px;}
-  .block p{font-size:15.5px; line-height:1.75; color:#4B4133; max-width:640px;}
+  section.block{padding:88px 28px;}
+  @media (max-width:680px){ section.block{padding:64px 22px;} }
+  .block h2{font-size:clamp(28px,4.2vw,40px); margin:12px 0 24px; letter-spacing:-0.01em;}
+  .block p{font-size:16px; line-height:1.75; color:var(--ink-2); margin:0;}
   .block p + p{margin-top:16px;}
+  .section-head{max-width:640px;}
+  .section-head p{margin-top:-6px;}
 
   .about{background:var(--paper);}
   .roles{background:var(--paper-dim);}
@@ -132,165 +173,274 @@
   .life{background:var(--paper-dim);}
   .process{background:var(--paper);}
 
-  /* role cards */
-  .role-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:24px;}
-  @media (max-width:680px){.role-grid{grid-template-columns:1fr;}}
-  .role-card{
-    background:var(--card); border-radius:6px; padding:22px 20px;
-    border-top:4px solid var(--blue);
-    box-shadow:0 1px 2px rgba(43,33,23,0.05);
+  /* about: two columns with a pull quote */
+  .about-grid{display:grid; grid-template-columns:0.9fr 1.3fr; gap:64px; align-items:start;}
+  @media (max-width:860px){ .about-grid{grid-template-columns:1fr; gap:28px;} }
+  .monogram{
+    width:76px; height:76px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    background:var(--blue); color:#FFF8EA; font-family:'Fraunces', serif; font-size:30px;
+    box-shadow:inset 0 -6px 0 var(--red); margin-bottom:18px;
   }
-  .role-card:nth-child(2){border-top-color:var(--gold);}
-  .role-card:nth-child(3){border-top-color:var(--red);}
-  .role-card .role-label{font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.06em; color:var(--blue-deep); text-transform:uppercase;}
-  .role-card:nth-child(2) .role-label{color:#8a651f;}
-  .role-card:nth-child(3) .role-label{color:var(--red);}
-  .role-card h3{font-size:18px; margin-top:8px; font-weight:500;}
-  .role-card p{font-size:14px; margin-top:8px; color:#5A5040; line-height:1.55;}
+  .pull{
+    margin:28px 0 0; padding:22px 24px; background:var(--card); border-left:4px solid var(--red);
+    border-radius:0 8px 8px 0; box-shadow:var(--shadow);
+    font-family:'Fraunces', serif; font-style:italic; font-size:20px; line-height:1.4; color:var(--ink);
+  }
+  .about-text p:first-child{font-size:17.5px; color:var(--ink);}
 
-  /* services */
-  .svc-card{border-top:1px solid var(--line); padding:26px 0;}
-  .svc-card:last-child{border-bottom:1px solid var(--line);}
-  .svc-head{display:flex; align-items:baseline; gap:14px; margin-bottom:10px;}
-  .svc-num{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--red);}
-  .svc-card:nth-child(2) .svc-num{color:var(--blue);}
-  .svc-card:nth-child(3) .svc-num{color:var(--gold);}
-  .svc-card h3{font-size:20px; font-weight:500;}
-  .svc-card ul{margin:0; padding-left:0; list-style:none; max-width:600px;}
-  .svc-card li{font-size:15px; color:#4B4133; line-height:1.6; padding:6px 0 6px 20px; position:relative;}
-  .svc-card li::before{content:'—'; position:absolute; left:0; color:var(--blue); font-weight:600;}
+  /* role cards */
+  .role-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:8px;}
+  @media (max-width:760px){.role-grid{grid-template-columns:1fr;}}
+  .role-card{
+    background:var(--card); border-radius:8px; padding:26px 24px 28px;
+    border-top:4px solid var(--blue); box-shadow:var(--shadow);
+    transition:transform .2s ease;
+  }
+  .role-card:hover{transform:translateY(-3px);}
+  .role-card:nth-child(3n+2){border-top-color:var(--gold);}
+  .role-card:nth-child(3n){border-top-color:var(--red);}
+  .role-card .role-label{font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.08em; color:var(--blue-deep); text-transform:uppercase;}
+  .role-card:nth-child(3n+2) .role-label{color:var(--gold-ink);}
+  .role-card:nth-child(3n) .role-label{color:var(--red);}
+  .role-card h3{font-size:21px; margin-top:10px;}
+  .role-card p{font-size:14.5px; margin-top:10px; color:#5A5040; line-height:1.6;}
+
+  /* services as cards */
+  .svc-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  @media (max-width:900px){ .svc-grid{grid-template-columns:1fr;} }
+  .svc-card{
+    background:var(--card); border:1px solid var(--line); border-radius:8px;
+    padding:28px 24px; display:flex; flex-direction:column;
+  }
+  .svc-num{
+    width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:#fff; background:var(--red); margin-bottom:16px;
+  }
+  .svc-card:nth-child(2) .svc-num{background:var(--blue);}
+  .svc-card:nth-child(3) .svc-num{background:var(--gold);}
+  .svc-card h3{font-size:22px; margin-bottom:14px;}
+  .svc-card ul{margin:0; padding:0; list-style:none;}
+  .svc-card li{font-size:14.5px; color:var(--ink-2); line-height:1.55; padding:8px 0 8px 22px; position:relative; border-top:1px solid var(--line);}
+  .svc-card li::before{content:''; position:absolute; left:2px; top:16px; width:8px; height:8px; border-radius:2px; background:var(--blue); transform:rotate(45deg);}
+  .svc-card:nth-child(1) li::before{background:var(--red);}
+  .svc-card:nth-child(3) li::before{background:var(--gold);}
 
   /* life / everyday */
-  .life-grid{display:flex; flex-direction:column; gap:0; margin-top:20px;}
-  .life-item{display:flex; gap:16px; padding:18px 0; border-bottom:1px solid var(--line);}
-  .life-item:first-child{border-top:1px solid var(--line);}
+  .life-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:28px;}
+  @media (max-width:760px){ .life-grid{grid-template-columns:1fr;} }
+  .life-item{display:flex; gap:16px; padding:20px; background:var(--card); border-radius:8px; border:1px solid var(--line);}
   .life-item .li-icon{
-    width:34px;height:34px;border-radius:50%;flex:none;
+    width:38px;height:38px;border-radius:50%;flex:none;
     display:flex;align-items:center;justify-content:center;
-    font-family:'IBM Plex Mono', monospace; font-size:12px; font-weight:600; color:#fff;
+    font-family:'IBM Plex Mono', monospace; font-size:13px; font-weight:600; color:#fff;
   }
   .life-item:nth-child(1) .li-icon{background:var(--blue);}
   .life-item:nth-child(2) .li-icon{background:var(--red);}
   .life-item:nth-child(3) .li-icon{background:var(--gold);}
   .life-item:nth-child(4) .li-icon{background:var(--blue-soft);}
   .life-item:nth-child(5) .li-icon{background:var(--red-soft);}
-  .life-item h4{font-family:'IBM Plex Sans'; font-size:15.5px; font-weight:600; margin:0 0 4px;}
-  .life-item p{font-size:14.5px; color:#4B4133; margin:0; line-height:1.6;}
+  .life-item h4{font-family:'Fraunces', serif; font-size:18px; font-weight:500; margin:2px 0 6px;}
+  .life-item p{font-size:14.5px; color:var(--ink-2); margin:0; line-height:1.6;}
 
-  /* process */
-  .steps{display:flex; flex-direction:column; margin-top:10px;}
-  .step{display:flex; gap:20px; padding:20px 0; border-bottom:1px solid var(--line);}
-  .step:first-child{border-top:1px solid var(--line);}
-  .step .n{font-family:'Fraunces', serif; font-size:26px; color:var(--red); min-width:34px;}
-  .step:nth-child(2) .n{color:var(--blue);}
-  .step:nth-child(3) .n{color:var(--gold);}
-  .step .t{font-size:15.5px; color:#4B4133; line-height:1.6; padding-top:4px;}
-  .step .t b{color:var(--ink); font-weight:600;}
+  /* process: horizontal timeline */
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin-top:12px; position:relative;}
+  .steps::before{content:''; position:absolute; left:20px; right:20px; top:26px; height:2px; background:repeating-linear-gradient(90deg, var(--line) 0 8px, transparent 8px 14px);}
+  .step{position:relative; padding-right:28px;}
+  .step .n{
+    position:relative; z-index:1; display:inline-flex; align-items:center; justify-content:center;
+    width:52px; height:52px; border-radius:50%; background:var(--paper); border:2px solid var(--red);
+    font-family:'Fraunces', serif; font-size:20px; color:var(--red);
+  }
+  .step:nth-child(2) .n{color:var(--blue); border-color:var(--blue);}
+  .step:nth-child(3) .n{color:var(--gold-ink); border-color:var(--gold);}
+  .step .t{display:block; margin-top:18px; font-size:15.5px; color:var(--ink-2); line-height:1.6;}
+  .step .t b{display:block; font-family:'Fraunces', serif; font-weight:500; font-size:20px; color:var(--ink); margin-bottom:4px;}
+  @media (max-width:760px){
+    .steps{grid-template-columns:1fr; gap:24px;}
+    .steps::before{left:25px; right:auto; top:20px; bottom:20px; width:2px; height:auto; background:repeating-linear-gradient(180deg, var(--line) 0 8px, transparent 8px 14px);}
+    .step{display:grid; grid-template-columns:52px 1fr; gap:18px; padding-right:0;}
+    .step .t{margin-top:4px;}
+  }
 
-  .contact{background:var(--blue-deep); color:#FBF3E4; padding:76px 28px 0;}
-  .contact h2{color:#FFF8EA; font-size:clamp(28px,5vw,40px);}
-  .contact p.lead{color:#DCE4F0; margin-top:16px; max-width:520px; font-size:15.5px; line-height:1.7;}
-  .contact-info{margin-top:28px; display:flex; flex-direction:column; gap:8px; font-family:'IBM Plex Mono', monospace; font-size:13.5px; color:#F2C9A8;}
-  .contact .cta-row{margin-top:28px; padding-bottom:56px;}
+  /* ===== CONTACT ===== */
+  .contact{background:var(--blue-deep); color:#FBF3E4; padding:88px 28px 0;}
+  .contact-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:center; padding-bottom:72px;}
+  @media (max-width:860px){ .contact-grid{grid-template-columns:1fr; gap:32px;} .contact{padding-top:64px;} }
+  .contact .eyebrow{color:#F2C9A8;}
+  .contact h2{color:#FFF8EA; font-size:clamp(34px,5vw,52px); margin-top:12px;}
+  .contact p.lead{color:#DCE4F0; margin-top:16px; max-width:480px; font-size:16.5px; line-height:1.7;}
   .contact .btn-primary{background:var(--red);}
   .contact .btn-primary:hover{background:#a52e21;}
-  .btn-whatsapp{
-    display:inline-flex; align-items:center; gap:10px;
-    background:#25D366; color:#0b2b16; text-decoration:none;
-    font-weight:600; font-size:14.5px;
-    padding:12px 22px 12px 16px; border-radius:3px;
+  .contact-card{background:rgba(255,248,234,0.06); border:1px solid rgba(255,248,234,0.16); border-radius:10px; padding:8px 24px;}
+  .c-row{display:flex; flex-direction:column; gap:4px; padding:16px 0; border-bottom:1px solid rgba(255,248,234,0.12);}
+  .c-row:last-child{border-bottom:none;}
+  .c-row .k{font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:0.12em; text-transform:uppercase; color:#F2C9A8;}
+  .c-row a{color:#FFF8EA; text-decoration:none; font-size:17px; font-weight:500; word-break:break-word;}
+  .c-row a:hover{text-decoration:underline; text-underline-offset:3px;}
+  .c-row .flag{display:inline-block; font-family:'IBM Plex Mono', monospace; font-size:10px; padding:2px 6px; border-radius:3px; margin-left:8px; vertical-align:2px; letter-spacing:0.06em;}
+  .flag.fi{background:#FFF8EA; color:var(--blue-deep);}
+  .flag.pl{background:var(--red); color:#fff;}
+
+  .foot{background:var(--paper);}
+  .foot-inner{max-width:var(--max); margin:0 auto; padding:22px 28px; font-size:12.5px; color:#8a7a63; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;}
+  .foot a{text-decoration:none;}
+
+  /* floating WhatsApp on phones */
+  .fab{
+    position:fixed; right:16px; bottom:16px; z-index:60; width:56px; height:56px; border-radius:50%;
+    background:#25D366; color:#0b2b16; display:none; align-items:center; justify-content:center;
+    box-shadow:0 6px 20px rgba(0,0,0,0.25); text-decoration:none;
   }
-  .btn-whatsapp:hover{background:#1EBE5B;}
-  .btn-whatsapp svg{width:20px; height:20px; flex:none;}
-  .foot{padding:20px 28px; font-size:12px; color:#8a7a63; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; background:var(--paper);}
+  .fab svg{width:28px; height:28px;}
+  @media (max-width:760px){ .fab{display:flex;} }
 
   [data-lang-block]{display:none;}
   [data-lang-block].active{display:block;}
-  .role-card[data-lang-block].active{display:block;}
   .life-item[data-lang-block].active{display:flex;}
+  .role-grid[data-lang-block].active{display:grid;}
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <div class="brand">
-    <span class="mark"><span class="sq"></span><span class="h"></span><span class="v"></span><span class="bar"></span></span>
-    FinPol Link
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#top">
+      <span class="mark"><span class="sq"></span><span class="h"></span><span class="v"></span><span class="bar"></span></span>
+      FinPol Link
+    </a>
+    <nav class="nav" aria-label="Main">
+      <div data-lang-block data-lang="fi"><a href="#about">Minusta</a><a href="#services">Palvelut</a><a href="#life">Arki Suomessa</a><a href="#contact">Yhteystiedot</a></div>
+      <div data-lang-block data-lang="pl"><a href="#about">O mnie</a><a href="#services">Usługi</a><a href="#life">Życie w Finlandii</a><a href="#contact">Kontakt</a></div>
+      <div data-lang-block data-lang="en"><a href="#about">About</a><a href="#services">Services</a><a href="#life">Life in Finland</a><a href="#contact">Contact</a></div>
+    </nav>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button class="stamp" data-lang="fi" lang="fi">FI</button>
+      <button class="stamp" data-lang="pl" lang="pl">PL</button>
+      <button class="stamp" data-lang="en" lang="en">EN</button>
+    </div>
   </div>
-  <div class="lang-switch">
-    <button class="stamp" data-lang="fi">FI</button>
-    <button class="stamp" data-lang="pl">PL</button>
-    <button class="stamp" data-lang="en">EN</button>
-  </div>
-</div>
+</header>
 
 <!-- ============ HERO ============ -->
-<div class="hero">
-  <div class="hero-inner">
+<div class="hero" id="top">
+  <div class="wrap hero-grid">
 
-    <div data-lang-block data-lang="fi">
-      <span class="eyebrow">Tulkkaus · Muuttopalvelut · Suomi ↔ Puola</span>
-      <h1>Kaksi kieltä.<br>Yksi keskustelu.</h1>
-      <p class="sub">Autan puolalaisia työntekijöitä, asiantuntijoita ja johtajia Suomessa. Puhun sekä suomea että puolaa äidinkielenäni. Olen asunut molemmissa maissa yli 35 vuotta.</p>
-      <div class="cta-row">
-        <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView()">Ota yhteyttä</button>
-        <button class="btn-ghost" onclick="document.getElementById('services').scrollIntoView()">Katso palvelut</button>
+    <div>
+      <div data-lang-block data-lang="fi">
+        <span class="eyebrow">Tulkkaus · Muuttopalvelut · Suomi ↔ Puola</span>
+        <h1>Kaksi <em>kieltä.</em><br>Yksi <em class="r">keskustelu.</em></h1>
+        <p class="sub">Autan puolalaisia työntekijöitä, asiantuntijoita ja johtajia Suomessa. Puhun sekä suomea että puolaa äidinkielenäni. Olen asunut molemmissa maissa yli 35 vuotta.</p>
+        <div class="cta-row">
+          <a class="btn-primary" href="#contact">Ota yhteyttä</a>
+          <a class="btn-ghost" href="#services">Katso palvelut</a>
+        </div>
+      </div>
+      <div data-lang-block data-lang="pl">
+        <span class="eyebrow">Tłumaczenia · Przeprowadzka · Finlandia ↔ Polska</span>
+        <h1>Dwa <em>języki.</em><br>Jedna <em class="r">rozmowa.</em></h1>
+        <p class="sub">Pomagam polskim pracownikom, specjalistom i menedżerom w Finlandii. Mówię po fińsku i po polsku jak w językach ojczystych. Mieszkałam w obu krajach ponad 35 lat.</p>
+        <div class="cta-row">
+          <a class="btn-primary" href="#contact">Skontaktuj się</a>
+          <a class="btn-ghost" href="#services">Zobacz usługi</a>
+        </div>
+      </div>
+      <div data-lang-block data-lang="en">
+        <span class="eyebrow">Interpreting · Relocation · Suomi ↔ Polska</span>
+        <h1>Two <em>languages.</em><br>One <em class="r">conversation.</em></h1>
+        <p class="sub">I help Polish workers, specialists, and managers in Finland. Finnish and Polish are both my native languages. I've lived in both countries for over 35 years.</p>
+        <div class="cta-row">
+          <a class="btn-primary" href="#contact">Get in touch</a>
+          <a class="btn-ghost" href="#services">See services</a>
+        </div>
       </div>
     </div>
 
-    <div data-lang-block data-lang="pl">
-      <span class="eyebrow">Tłumaczenia · Przeprowadzka · Finlandia ↔ Polska</span>
-      <h1>Dwa języki.<br>Jedna rozmowa.</h1>
-      <p class="sub">Pomagam polskim pracownikom, specjalistom i menedżerom w Finlandii. Mówię po fińsku i po polsku jak w językach ojczystych. Mieszkałam w obu krajach ponad 35 lat.</p>
-      <div class="cta-row">
-        <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView()">Skontaktuj się</button>
-        <button class="btn-ghost" onclick="document.getElementById('services').scrollIntoView()">Zobacz usługi</button>
+    <aside class="pass" aria-label="FinPol Link">
+      <div class="pass-head">
+        <span class="route">FI <span class="arrow">⇄</span> PL</span>
+        <span class="tag">FinPol Link</span>
       </div>
-    </div>
-
-    <div data-lang-block data-lang="en">
-      <span class="eyebrow">Interpreting · Relocation · Suomi ↔ Polska</span>
-      <h1>Two languages.<br>One conversation.</h1>
-      <p class="sub">I help Polish workers, specialists, and managers in Finland. Finnish and Polish are both my native languages. I've lived in both countries for over 35 years.</p>
-      <div class="cta-row">
-        <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView()">Get in touch</button>
-        <button class="btn-ghost" onclick="document.getElementById('services').scrollIntoView()">See services</button>
+      <dl class="pass-body" data-lang-block data-lang="fi">
+        <div class="pass-row"><dt>Kielet</dt><dd>Suomi ja puola — molemmat äidinkieliä</dd></div>
+        <div class="pass-row"><dt>Kokemus</dt><dd>Yli 35 vuotta Suomessa ja Puolassa</dd></div>
+        <div class="pass-row"><dt>Toimialat</dt><dd>Teollisuus, telakka, kuljetus ja logistiikka</dd></div>
+        <div class="pass-row"><dt>Tapa</dt><dd>Paikan päällä tai etänä (Teams, Zoom)</dd></div>
+      </dl>
+      <dl class="pass-body" data-lang-block data-lang="pl">
+        <div class="pass-row"><dt>Języki</dt><dd>Fiński i polski — oba jak ojczyste</dd></div>
+        <div class="pass-row"><dt>Doświadczenie</dt><dd>Ponad 35 lat w Finlandii i w Polsce</dd></div>
+        <div class="pass-row"><dt>Branże</dt><dd>Przemysł, stocznie, transport i logistyka</dd></div>
+        <div class="pass-row"><dt>Forma</dt><dd>Na miejscu lub zdalnie (Teams, Zoom)</dd></div>
+      </dl>
+      <dl class="pass-body" data-lang-block data-lang="en">
+        <div class="pass-row"><dt>Languages</dt><dd>Finnish and Polish — both native</dd></div>
+        <div class="pass-row"><dt>Experience</dt><dd>35+ years in Finland and Poland</dd></div>
+        <div class="pass-row"><dt>Sectors</dt><dd>Industry, shipyards, transport and logistics</dd></div>
+        <div class="pass-row"><dt>Format</dt><dd>On site or remote (Teams, Zoom)</dd></div>
+      </dl>
+      <div class="pass-foot">
+        <span class="name">Eeva Piiroinen</span>
+        <span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
       </div>
-    </div>
+    </aside>
 
   </div>
   <div class="ribbon"><span class="b"></span><span class="r"></span></div>
 </div>
 
 <!-- ============ ABOUT ============ -->
-<section class="block about">
+<section class="block about" id="about">
   <div class="wrap">
 
     <div data-lang-block data-lang="fi">
-      <span class="eyebrow blue">Kuka minä olen</span>
-      <h2>Eeva Piiroinen</h2>
-      <p>Olen asunut Suomessa yli 35 vuotta. Osan elämästäni olen asunut myös Puolassa. Suomi ja puola ovat molemmat äidinkieliäni.</p>
-      <p>En opetellut tätä koulussa. Opin sen arjessa: keittiön pöydässä, työhaastatteluissa, verotoimistossa ja tehtaan lattialla.</p>
-      <p>Kun puolalainen tulee Suomeen töihin, ongelma ei yleensä ole sanat. Ongelma on se, ymmärtävätkö ihmiset toisiaan oikeasti. Suomalaiset ja puolalaiset sopivat asioista eri tavalla. Pieni väärinymmärrys voi maksaa aikaa ja rahaa.</p>
-      <p>Olen työskennellyt tehtaissa ja telakalla. Tiedän, miten työ tehdään — en vain, miten siitä puhutaan.</p>
+      <div class="about-grid">
+        <div>
+          <div class="monogram" aria-hidden="true">EP</div>
+          <span class="eyebrow blue">Kuka minä olen</span>
+          <h2>Eeva Piiroinen</h2>
+          <blockquote class="pull">Ongelma ei yleensä ole sanat. Ongelma on se, ymmärtävätkö ihmiset toisiaan oikeasti.</blockquote>
+        </div>
+        <div class="about-text">
+          <p>Olen asunut Suomessa yli 35 vuotta. Osan elämästäni olen asunut myös Puolassa. Suomi ja puola ovat molemmat äidinkieliäni.</p>
+          <p>En opetellut tätä koulussa. Opin sen arjessa: keittiön pöydässä, työhaastatteluissa, verotoimistossa ja tehtaan lattialla.</p>
+          <p>Kun puolalainen tulee Suomeen töihin, ongelma ei yleensä ole sanat. Ongelma on se, ymmärtävätkö ihmiset toisiaan oikeasti. Suomalaiset ja puolalaiset sopivat asioista eri tavalla. Pieni väärinymmärrys voi maksaa aikaa ja rahaa.</p>
+          <p>Olen työskennellyt tehtaissa ja telakalla. Tiedän, miten työ tehdään — en vain, miten siitä puhutaan.</p>
+        </div>
+      </div>
     </div>
 
     <div data-lang-block data-lang="pl">
-      <span class="eyebrow blue">Kim jestem</span>
-      <h2>Eeva Piiroinen</h2>
-      <p>Mieszkam w Finlandii ponad 35 lat. Część życia mieszkałam też w Polsce. Fiński i polski są moimi językami ojczystymi.</p>
-      <p>Nie nauczyłam się tego w szkole. Nauczyłam się tego w życiu: przy kuchennym stole, na rozmowach o pracę, w urzędzie skarbowym i na hali fabrycznej.</p>
-      <p>Kiedy Polak przyjeżdża do pracy w Finlandii, problemem rzadko są same słowa. Problemem jest to, czy ludzie naprawdę się rozumieją. Finowie i Polacy inaczej dogadują się w sprawach. Małe nieporozumienie może kosztować czas i pieniądze.</p>
-      <p>Pracowałam w fabrykach i w stoczni. Wiem, jak wygląda praca — nie tylko, jak się o niej mówi.</p>
+      <div class="about-grid">
+        <div>
+          <div class="monogram" aria-hidden="true">EP</div>
+          <span class="eyebrow blue">Kim jestem</span>
+          <h2>Eeva Piiroinen</h2>
+          <blockquote class="pull">Problemem rzadko są same słowa. Problemem jest to, czy ludzie naprawdę się rozumieją.</blockquote>
+        </div>
+        <div class="about-text">
+          <p>Mieszkam w Finlandii ponad 35 lat. Część życia mieszkałam też w Polsce. Fiński i polski są moimi językami ojczystymi.</p>
+          <p>Nie nauczyłam się tego w szkole. Nauczyłam się tego w życiu: przy kuchennym stole, na rozmowach o pracę, w urzędzie skarbowym i na hali fabrycznej.</p>
+          <p>Kiedy Polak przyjeżdża do pracy w Finlandii, problemem rzadko są same słowa. Problemem jest to, czy ludzie naprawdę się rozumieją. Finowie i Polacy inaczej dogadują się w sprawach. Małe nieporozumienie może kosztować czas i pieniądze.</p>
+          <p>Pracowałam w fabrykach i w stoczni. Wiem, jak wygląda praca — nie tylko, jak się o niej mówi.</p>
+        </div>
+      </div>
     </div>
 
     <div data-lang-block data-lang="en">
-      <span class="eyebrow blue">Who I am</span>
-      <h2>Eeva Piiroinen</h2>
-      <p>I've lived in Finland for over 35 years. I've also lived part of my life in Poland. Finnish and Polish are both my native languages.</p>
-      <p>I didn't learn this in school. I learned it in real life: at the kitchen table, in job interviews, in the tax office, on the factory floor.</p>
-      <p>When a Polish person comes to work in Finland, the problem usually isn't the words. It's whether people really understand each other. Finns and Poles agree on things in different ways. A small misunderstanding can cost time and money.</p>
-      <p>I've worked in factories and in a shipyard. I know how the work is done — not just how to talk about it.</p>
+      <div class="about-grid">
+        <div>
+          <div class="monogram" aria-hidden="true">EP</div>
+          <span class="eyebrow blue">Who I am</span>
+          <h2>Eeva Piiroinen</h2>
+          <blockquote class="pull">The problem usually isn't the words. It's whether people really understand each other.</blockquote>
+        </div>
+        <div class="about-text">
+          <p>I've lived in Finland for over 35 years. I've also lived part of my life in Poland. Finnish and Polish are both my native languages.</p>
+          <p>I didn't learn this in school. I learned it in real life: at the kitchen table, in job interviews, in the tax office, on the factory floor.</p>
+          <p>When a Polish person comes to work in Finland, the problem usually isn't the words. It's whether people really understand each other. Finns and Poles agree on things in different ways. A small misunderstanding can cost time and money.</p>
+          <p>I've worked in factories and in a shipyard. I know how the work is done — not just how to talk about it.</p>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -300,31 +450,26 @@
 <section class="block roles">
   <div class="wrap">
 
-    <div data-lang-block data-lang="fi">
-      <span class="eyebrow">Kenelle</span>
-      <h2>Riippumatta roolistasi</h2>
-    </div>
-    <div data-lang-block data-lang="pl">
-      <span class="eyebrow">Dla kogo</span>
-      <h2>Bez względu na twoją rolę</h2>
-    </div>
-    <div data-lang-block data-lang="en">
-      <span class="eyebrow">Who this is for</span>
-      <h2>Whatever your role</h2>
+    <div class="section-head">
+      <div data-lang-block data-lang="fi"><span class="eyebrow">Kenelle</span><h2>Riippumatta roolistasi</h2></div>
+      <div data-lang-block data-lang="pl"><span class="eyebrow">Dla kogo</span><h2>Bez względu na twoją rolę</h2></div>
+      <div data-lang-block data-lang="en"><span class="eyebrow">Who this is for</span><h2>Whatever your role</h2></div>
     </div>
 
-    <div class="role-grid">
-      <div data-lang-block data-lang="fi" class="role-card"><div class="role-label">Johto</div><h3>Toimitusjohtajalle</h3><p>Neuvottelet suomalaisen kumppanin tai viranomaisen kanssa. Väärä sana voi maksaa kalliisti. Varmistan, että viestisi menee perille oikein.</p></div>
-      <div data-lang-block data-lang="fi" class="role-card"><div class="role-label">Tekninen</div><h3>Asiantuntijalle</h3><p>Palaverissa tekniset sanat ovat tärkeitä. Tunnen teollisuuden ja telakan sanaston. Keskustelu pysyy täsmällisenä.</p></div>
-      <div data-lang-block data-lang="fi" class="role-card"><div class="role-label">Arki</div><h3>Työntekijälle</h3><p>Et tarvitse titteliä saadaksesi apua. Autan asunnon haussa, verokortissa ja pankkitilissä. Arki hoituu ilman stressiä.</p></div>
-
-      <div data-lang-block data-lang="pl" class="role-card"><div class="role-label">Zarząd</div><h3>Dla prezesa</h3><p>Negocjujesz z fińskim partnerem albo urzędem. Złe słowo może dużo kosztować. Dbam, żeby twoja wiadomość dotarła dobrze.</p></div>
-      <div data-lang-block data-lang="pl" class="role-card"><div class="role-label">Technika</div><h3>Dla specjalisty</h3><p>Na spotkaniu liczą się słowa techniczne. Znam słownictwo przemysłu i stoczni. Rozmowa zostaje precyzyjna.</p></div>
-      <div data-lang-block data-lang="pl" class="role-card"><div class="role-label">Codzienność</div><h3>Dla pracownika</h3><p>Nie potrzebujesz stanowiska, żeby dostać pomoc. Pomagam w mieszkaniu, karcie podatkowej i koncie bankowym. Codzienne sprawy bez stresu.</p></div>
-
-      <div data-lang-block data-lang="en" class="role-card"><div class="role-label">Leadership</div><h3>For the CEO</h3><p>You're negotiating with a Finnish partner or authority. The wrong word can cost a lot. I make sure your message lands right.</p></div>
-      <div data-lang-block data-lang="en" class="role-card"><div class="role-label">Technical</div><h3>For the specialist</h3><p>In a meeting, technical words matter. I know the vocabulary of industry and shipyards. The conversation stays precise.</p></div>
-      <div data-lang-block data-lang="en" class="role-card"><div class="role-label">Everyday</div><h3>For the employee</h3><p>You don't need a title to get help. I help with housing, tax cards, and bank accounts. Everyday things, without stress.</p></div>
+    <div class="role-grid" data-lang-block data-lang="fi">
+      <div class="role-card"><div class="role-label">Johto</div><h3>Toimitusjohtajalle</h3><p>Neuvottelet suomalaisen kumppanin tai viranomaisen kanssa. Väärä sana voi maksaa kalliisti. Varmistan, että viestisi menee perille oikein.</p></div>
+      <div class="role-card"><div class="role-label">Tekninen</div><h3>Asiantuntijalle</h3><p>Palaverissa tekniset sanat ovat tärkeitä. Tunnen teollisuuden ja telakan sanaston. Keskustelu pysyy täsmällisenä.</p></div>
+      <div class="role-card"><div class="role-label">Arki</div><h3>Työntekijälle</h3><p>Et tarvitse titteliä saadaksesi apua. Autan asunnon haussa, verokortissa ja pankkitilissä. Arki hoituu ilman stressiä.</p></div>
+    </div>
+    <div class="role-grid" data-lang-block data-lang="pl">
+      <div class="role-card"><div class="role-label">Zarząd</div><h3>Dla prezesa</h3><p>Negocjujesz z fińskim partnerem albo urzędem. Złe słowo może dużo kosztować. Dbam, żeby twoja wiadomość dotarła dobrze.</p></div>
+      <div class="role-card"><div class="role-label">Technika</div><h3>Dla specjalisty</h3><p>Na spotkaniu liczą się słowa techniczne. Znam słownictwo przemysłu i stoczni. Rozmowa zostaje precyzyjna.</p></div>
+      <div class="role-card"><div class="role-label">Codzienność</div><h3>Dla pracownika</h3><p>Nie potrzebujesz stanowiska, żeby dostać pomoc. Pomagam w mieszkaniu, karcie podatkowej i koncie bankowym. Codzienne sprawy bez stresu.</p></div>
+    </div>
+    <div class="role-grid" data-lang-block data-lang="en">
+      <div class="role-card"><div class="role-label">Leadership</div><h3>For the CEO</h3><p>You're negotiating with a Finnish partner or authority. The wrong word can cost a lot. I make sure your message lands right.</p></div>
+      <div class="role-card"><div class="role-label">Technical</div><h3>For the specialist</h3><p>In a meeting, technical words matter. I know the vocabulary of industry and shipyards. The conversation stays precise.</p></div>
+      <div class="role-card"><div class="role-label">Everyday</div><h3>For the employee</h3><p>You don't need a title to get help. I help with housing, tax cards, and bank accounts. Everyday things, without stress.</p></div>
     </div>
 
   </div>
@@ -335,98 +480,101 @@
   <div class="wrap">
 
     <div data-lang-block data-lang="fi">
-      <span class="eyebrow">Palvelut</span>
-      <h2>Mistä voin auttaa</h2>
-      <div class="svc-card">
-        <div class="svc-head"><span class="svc-num">01</span><h3>Tulkkaus</h3></div>
-        <ul>
-          <li>Liiketapaamiset ja neuvottelut, paikan päällä tai etänä (Teams, Zoom)</li>
-          <li>Tekniset projektipalaverit ja työmaakäynnit</li>
-          <li>Asiakirjojen käännökset nopealla aikataululla — sopimukset, tarjoukset, kirjeenvaihto</li>
-          <li>Tulkkausta, joka lukee tilannetta, ei vain lauseita</li>
-        </ul>
-      </div>
-      <div class="svc-card">
-        <div class="svc-head"><span class="svc-num">02</span><h3>Suomeen asettuminen</h3></div>
-        <ul>
-          <li>Asunnon haku ja vuokraneuvottelu</li>
-          <li>Viranomaisrekisteröinnit: DVV, Kela, verokortti, pankkitili</li>
-          <li>Selkeä ennakkotieto siitä, mitä kukin virasto odottaa ennen kuin astut ovesta sisään</li>
-          <li>Jatkuva tuki ensimmäisten, usein sekavimpien kuukausien aikana</li>
-        </ul>
-      </div>
-      <div class="svc-card">
-        <div class="svc-head"><span class="svc-num">03</span><h3>Kuljetus- ja logistiikka-ala</h3></div>
-        <ul>
-          <li>CMR-asiakirjojen käännökset</li>
-          <li>Neuvottelutulkkaus kuljetus- ja logistiikkasopimuksissa</li>
-          <li>Tuki ajoneuvohankinnoissa ja tullausprosesseissa</li>
-          <li>Kuljettajakoulutusmateriaalien käännökset</li>
-        </ul>
+      <div class="section-head"><span class="eyebrow">Palvelut</span><h2>Mistä voin auttaa</h2></div>
+      <div class="svc-grid">
+        <div class="svc-card">
+          <span class="svc-num">01</span><h3>Tulkkaus</h3>
+          <ul>
+            <li>Liiketapaamiset ja neuvottelut, paikan päällä tai etänä (Teams, Zoom)</li>
+            <li>Tekniset projektipalaverit ja työmaakäynnit</li>
+            <li>Asiakirjojen käännökset nopealla aikataululla — sopimukset, tarjoukset, kirjeenvaihto</li>
+            <li>Tulkkausta, joka lukee tilannetta, ei vain lauseita</li>
+          </ul>
+        </div>
+        <div class="svc-card">
+          <span class="svc-num">02</span><h3>Suomeen asettuminen</h3>
+          <ul>
+            <li>Asunnon haku ja vuokraneuvottelu</li>
+            <li>Viranomaisrekisteröinnit: DVV, Kela, verokortti, pankkitili</li>
+            <li>Selkeä ennakkotieto siitä, mitä kukin virasto odottaa ennen kuin astut ovesta sisään</li>
+            <li>Jatkuva tuki ensimmäisten, usein sekavimpien kuukausien aikana</li>
+          </ul>
+        </div>
+        <div class="svc-card">
+          <span class="svc-num">03</span><h3>Kuljetus- ja logistiikka-ala</h3>
+          <ul>
+            <li>CMR-asiakirjojen käännökset</li>
+            <li>Neuvottelutulkkaus kuljetus- ja logistiikkasopimuksissa</li>
+            <li>Tuki ajoneuvohankinnoissa ja tullausprosesseissa</li>
+            <li>Kuljettajakoulutusmateriaalien käännökset</li>
+          </ul>
+        </div>
       </div>
     </div>
 
     <div data-lang-block data-lang="pl">
-      <span class="eyebrow">Usługi</span>
-      <h2>W czym mogę pomóc</h2>
-      <div class="svc-card">
-        <div class="svc-head"><span class="svc-num">01</span><h3>Tłumaczenia</h3></div>
-        <ul>
-          <li>Spotkania biznesowe i negocjacje, na miejscu lub zdalnie (Teams, Zoom)</li>
-          <li>Techniczne spotkania projektowe i wizyty na obiekcie</li>
-          <li>Tłumaczenia dokumentów w krótkim terminie — umowy, oferty, korespondencja</li>
-          <li>Tłumaczenie, które czyta sytuację, a nie tylko zdania</li>
-        </ul>
-      </div>
-      <div class="svc-card">
-        <div class="svc-head"><span class="svc-num">02</span><h3>Osiedlenie się w Finlandii</h3></div>
-        <ul>
-          <li>Poszukiwanie mieszkania i negocjacje warunków najmu</li>
-          <li>Rejestracja w urzędach: DVV, Kela, karta podatkowa, konto bankowe</li>
-          <li>Jasne wyjaśnienie, czego dana instytucja od ciebie oczekuje, zanim tam wejdziesz</li>
-          <li>Stałe wsparcie w pierwszych, najbardziej chaotycznych miesiącach</li>
-        </ul>
-      </div>
-      <div class="svc-card">
-        <div class="svc-head"><span class="svc-num">03</span><h3>Transport i logistyka</h3></div>
-        <ul>
-          <li>Tłumaczenia dokumentów CMR</li>
-          <li>Tłumaczenie negocjacji w branży transportowej i logistycznej</li>
-          <li>Wsparcie przy zakupie pojazdów i w procesach celnych</li>
-          <li>Tłumaczenie materiałów szkoleniowych dla kierowców</li>
-        </ul>
+      <div class="section-head"><span class="eyebrow">Usługi</span><h2>W czym mogę pomóc</h2></div>
+      <div class="svc-grid">
+        <div class="svc-card">
+          <span class="svc-num">01</span><h3>Tłumaczenia</h3>
+          <ul>
+            <li>Spotkania biznesowe i negocjacje, na miejscu lub zdalnie (Teams, Zoom)</li>
+            <li>Techniczne spotkania projektowe i wizyty na obiekcie</li>
+            <li>Tłumaczenia dokumentów w krótkim terminie — umowy, oferty, korespondencja</li>
+            <li>Tłumaczenie, które czyta sytuację, a nie tylko zdania</li>
+          </ul>
+        </div>
+        <div class="svc-card">
+          <span class="svc-num">02</span><h3>Osiedlenie się w Finlandii</h3>
+          <ul>
+            <li>Poszukiwanie mieszkania i negocjacje warunków najmu</li>
+            <li>Rejestracja w urzędach: DVV, Kela, karta podatkowa, konto bankowe</li>
+            <li>Jasne wyjaśnienie, czego dana instytucja od ciebie oczekuje, zanim tam wejdziesz</li>
+            <li>Stałe wsparcie w pierwszych, najbardziej chaotycznych miesiącach</li>
+          </ul>
+        </div>
+        <div class="svc-card">
+          <span class="svc-num">03</span><h3>Transport i logistyka</h3>
+          <ul>
+            <li>Tłumaczenia dokumentów CMR</li>
+            <li>Tłumaczenie negocjacji w branży transportowej i logistycznej</li>
+            <li>Wsparcie przy zakupie pojazdów i w procesach celnych</li>
+            <li>Tłumaczenie materiałów szkoleniowych dla kierowców</li>
+          </ul>
+        </div>
       </div>
     </div>
 
     <div data-lang-block data-lang="en">
-      <span class="eyebrow">Services</span>
-      <h2>What I can help with</h2>
-      <div class="svc-card">
-        <div class="svc-head"><span class="svc-num">01</span><h3>Interpreting</h3></div>
-        <ul>
-          <li>Business meetings and negotiations, in person or remote (Teams, Zoom)</li>
-          <li>Technical project meetings and site visits</li>
-          <li>Document translation on short notice — contracts, offers, correspondence</li>
-          <li>Interpreting that reads the room, not just the sentence</li>
-        </ul>
-      </div>
-      <div class="svc-card">
-        <div class="svc-head"><span class="svc-num">02</span><h3>Settling in Finland</h3></div>
-        <ul>
-          <li>Finding housing and negotiating the lease</li>
-          <li>Registering with the authorities: DVV, Kela, tax card, bank account</li>
-          <li>A clear picture of what each institution expects before you walk in the door</li>
-          <li>Ongoing support through the first, most confusing months</li>
-        </ul>
-      </div>
-      <div class="svc-card">
-        <div class="svc-head"><span class="svc-num">03</span><h3>Transport &amp; logistics</h3></div>
-        <ul>
-          <li>CMR document translation</li>
-          <li>Negotiation interpreting for transport and logistics deals</li>
-          <li>Support with vehicle purchases and customs processes</li>
-          <li>Translation of driver training materials</li>
-        </ul>
+      <div class="section-head"><span class="eyebrow">Services</span><h2>What I can help with</h2></div>
+      <div class="svc-grid">
+        <div class="svc-card">
+          <span class="svc-num">01</span><h3>Interpreting</h3>
+          <ul>
+            <li>Business meetings and negotiations, in person or remote (Teams, Zoom)</li>
+            <li>Technical project meetings and site visits</li>
+            <li>Document translation on short notice — contracts, offers, correspondence</li>
+            <li>Interpreting that reads the room, not just the sentence</li>
+          </ul>
+        </div>
+        <div class="svc-card">
+          <span class="svc-num">02</span><h3>Settling in Finland</h3>
+          <ul>
+            <li>Finding housing and negotiating the lease</li>
+            <li>Registering with the authorities: DVV, Kela, tax card, bank account</li>
+            <li>A clear picture of what each institution expects before you walk in the door</li>
+            <li>Ongoing support through the first, most confusing months</li>
+          </ul>
+        </div>
+        <div class="svc-card">
+          <span class="svc-num">03</span><h3>Transport &amp; logistics</h3>
+          <ul>
+            <li>CMR document translation</li>
+            <li>Negotiation interpreting for transport and logistics deals</li>
+            <li>Support with vehicle purchases and customs processes</li>
+            <li>Translation of driver training materials</li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -434,45 +582,51 @@
 </section>
 
 <!-- ============ EVERYDAY LIFE ============ -->
-<section class="block life">
+<section class="block life" id="life">
   <div class="wrap">
 
     <div data-lang-block data-lang="fi">
-      <span class="eyebrow blue">Arki Suomessa</span>
-      <h2>Helpompaa, kun ei tarvitse selvittää kaikkea yksin</h2>
-      <p>Suomessa asuminen on enemmän kuin paperityötä. Autan myös näissä, joita harva osaa kysyä etukäteen:</p>
+      <div class="section-head">
+        <span class="eyebrow blue">Arki Suomessa</span>
+        <h2>Helpompaa, kun ei tarvitse selvittää kaikkea yksin</h2>
+        <p>Suomessa asuminen on enemmän kuin paperityötä. Autan myös näissä, joita harva osaa kysyä etukäteen:</p>
+      </div>
       <div class="life-grid">
-        <div data-lang-block data-lang="fi" class="life-item"><span class="li-icon">+</span><div><h4>Terveydenhuolto</h4><p>Miten terveyskeskus, hammashoito ja apteekki toimivat, ja mitä sanoa kun tarvitset apua nopeasti.</p></div></div>
-        <div data-lang-block data-lang="fi" class="life-item"><span class="li-icon">€</span><div><h4>Pankki ja raha</h4><p>Tilin avaaminen, verkkopankkitunnukset ja suomalaiset maksutavat, jotka poikkeavat totutusta.</p></div></div>
-        <div data-lang-block data-lang="fi" class="life-item"><span class="li-icon">≡</span><div><h4>Työkulttuuri</h4><p>Suora viestintä, hiljaisuuden merkitys ja kokouskäytännöt — asiat, jotka yllättävät useimmat.</p></div></div>
-        <div data-lang-block data-lang="fi" class="life-item"><span class="li-icon">◔</span><div><h4>Perhe ja koulu</h4><p>Päivähoito, koulut ja neuvola, jos muutat Suomeen perheen kanssa.</p></div></div>
-        <div data-lang-block data-lang="fi" class="life-item"><span class="li-icon">❄</span><div><h4>Vuodenajat ja arki</h4><p>Pimeä talvi, valoisat kesäyöt — ja miten suomalaiset oikeasti elävät niiden kanssa.</p></div></div>
+        <div class="life-item"><span class="li-icon">+</span><div><h4>Terveydenhuolto</h4><p>Miten terveyskeskus, hammashoito ja apteekki toimivat, ja mitä sanoa kun tarvitset apua nopeasti.</p></div></div>
+        <div class="life-item"><span class="li-icon">€</span><div><h4>Pankki ja raha</h4><p>Tilin avaaminen, verkkopankkitunnukset ja suomalaiset maksutavat, jotka poikkeavat totutusta.</p></div></div>
+        <div class="life-item"><span class="li-icon">≡</span><div><h4>Työkulttuuri</h4><p>Suora viestintä, hiljaisuuden merkitys ja kokouskäytännöt — asiat, jotka yllättävät useimmat.</p></div></div>
+        <div class="life-item"><span class="li-icon">◔</span><div><h4>Perhe ja koulu</h4><p>Päivähoito, koulut ja neuvola, jos muutat Suomeen perheen kanssa.</p></div></div>
+        <div class="life-item"><span class="li-icon">❄</span><div><h4>Vuodenajat ja arki</h4><p>Pimeä talvi, valoisat kesäyöt — ja miten suomalaiset oikeasti elävät niiden kanssa.</p></div></div>
       </div>
     </div>
 
     <div data-lang-block data-lang="pl">
-      <span class="eyebrow blue">Codzienność w Finlandii</span>
-      <h2>Łatwiej, kiedy nie trzeba wszystkiego odkrywać samemu</h2>
-      <p>Życie w Finlandii to więcej niż formalności. Pomagam też w sprawach, o które mało kto pyta z wyprzedzeniem:</p>
+      <div class="section-head">
+        <span class="eyebrow blue">Codzienność w Finlandii</span>
+        <h2>Łatwiej, kiedy nie trzeba wszystkiego odkrywać samemu</h2>
+        <p>Życie w Finlandii to więcej niż formalności. Pomagam też w sprawach, o które mało kto pyta z wyprzedzeniem:</p>
+      </div>
       <div class="life-grid">
-        <div data-lang-block data-lang="pl" class="life-item"><span class="li-icon">+</span><div><h4>Opieka zdrowotna</h4><p>Jak działa przychodnia, dentysta i apteka — i co powiedzieć, gdy potrzebujesz szybkiej pomocy.</p></div></div>
-        <div data-lang-block data-lang="pl" class="life-item"><span class="li-icon">€</span><div><h4>Bank i finanse</h4><p>Otwarcie konta, bankowość internetowa i fińskie sposoby płatności, które różnią się od znanych.</p></div></div>
-        <div data-lang-block data-lang="pl" class="life-item"><span class="li-icon">≡</span><div><h4>Kultura pracy</h4><p>Bezpośrednia komunikacja, znaczenie ciszy i zasady spotkań — rzeczy, które zaskakują większość.</p></div></div>
-        <div data-lang-block data-lang="pl" class="life-item"><span class="li-icon">◔</span><div><h4>Rodzina i szkoła</h4><p>Żłobek, szkoły i opieka nad dzieckiem, jeśli przeprowadzasz się do Finlandii z rodziną.</p></div></div>
-        <div data-lang-block data-lang="pl" class="life-item"><span class="li-icon">❄</span><div><h4>Pory roku i codzienność</h4><p>Ciemna zima, jasne letnie noce — i jak Finowie naprawdę sobie z tym radzą.</p></div></div>
+        <div class="life-item"><span class="li-icon">+</span><div><h4>Opieka zdrowotna</h4><p>Jak działa przychodnia, dentysta i apteka — i co powiedzieć, gdy potrzebujesz szybkiej pomocy.</p></div></div>
+        <div class="life-item"><span class="li-icon">€</span><div><h4>Bank i finanse</h4><p>Otwarcie konta, bankowość internetowa i fińskie sposoby płatności, które różnią się od znanych.</p></div></div>
+        <div class="life-item"><span class="li-icon">≡</span><div><h4>Kultura pracy</h4><p>Bezpośrednia komunikacja, znaczenie ciszy i zasady spotkań — rzeczy, które zaskakują większość.</p></div></div>
+        <div class="life-item"><span class="li-icon">◔</span><div><h4>Rodzina i szkoła</h4><p>Żłobek, szkoły i opieka nad dzieckiem, jeśli przeprowadzasz się do Finlandii z rodziną.</p></div></div>
+        <div class="life-item"><span class="li-icon">❄</span><div><h4>Pory roku i codzienność</h4><p>Ciemna zima, jasne letnie noce — i jak Finowie naprawdę sobie z tym radzą.</p></div></div>
       </div>
     </div>
 
     <div data-lang-block data-lang="en">
-      <span class="eyebrow blue">Everyday life in Finland</span>
-      <h2>Easier, when you don't have to figure it all out alone</h2>
-      <p>Living in Finland is more than paperwork. I also help with the things few people know to ask about in advance:</p>
+      <div class="section-head">
+        <span class="eyebrow blue">Everyday life in Finland</span>
+        <h2>Easier, when you don't have to figure it all out alone</h2>
+        <p>Living in Finland is more than paperwork. I also help with the things few people know to ask about in advance:</p>
+      </div>
       <div class="life-grid">
-        <div data-lang-block data-lang="en" class="life-item"><span class="li-icon">+</span><div><h4>Healthcare</h4><p>How the health center, dentist, and pharmacy work — and what to say when you need help quickly.</p></div></div>
-        <div data-lang-block data-lang="en" class="life-item"><span class="li-icon">€</span><div><h4>Banking and money</h4><p>Opening an account, online banking, and Finnish payment habits that differ from what you're used to.</p></div></div>
-        <div data-lang-block data-lang="en" class="life-item"><span class="li-icon">≡</span><div><h4>Work culture</h4><p>Direct communication, the meaning of silence, and meeting habits — things that catch most people off guard.</p></div></div>
-        <div data-lang-block data-lang="en" class="life-item"><span class="li-icon">◔</span><div><h4>Family and school</h4><p>Daycare, schools, and child health clinics, if you're moving to Finland with a family.</p></div></div>
-        <div data-lang-block data-lang="en" class="life-item"><span class="li-icon">❄</span><div><h4>Seasons and daily life</h4><p>Dark winters, bright summer nights — and how Finns actually live with them.</p></div></div>
+        <div class="life-item"><span class="li-icon">+</span><div><h4>Healthcare</h4><p>How the health center, dentist, and pharmacy work — and what to say when you need help quickly.</p></div></div>
+        <div class="life-item"><span class="li-icon">€</span><div><h4>Banking and money</h4><p>Opening an account, online banking, and Finnish payment habits that differ from what you're used to.</p></div></div>
+        <div class="life-item"><span class="li-icon">≡</span><div><h4>Work culture</h4><p>Direct communication, the meaning of silence, and meeting habits — things that catch most people off guard.</p></div></div>
+        <div class="life-item"><span class="li-icon">◔</span><div><h4>Family and school</h4><p>Daycare, schools, and child health clinics, if you're moving to Finland with a family.</p></div></div>
+        <div class="life-item"><span class="li-icon">❄</span><div><h4>Seasons and daily life</h4><p>Dark winters, bright summer nights — and how Finns actually live with them.</p></div></div>
       </div>
     </div>
 
@@ -484,32 +638,29 @@
   <div class="wrap">
 
     <div data-lang-block data-lang="fi">
-      <span class="eyebrow">Näin se etenee</span>
-      <h2>Kolme askelta alkuun</h2>
+      <div class="section-head"><span class="eyebrow">Näin se etenee</span><h2>Kolme askelta alkuun</h2></div>
       <div class="steps">
-        <div class="step"><span class="n">01</span><span class="t"><b>Ota yhteyttä</b> — kerro lyhyesti, mitä tarvitset ja millä aikataululla.</span></div>
-        <div class="step"><span class="n">02</span><span class="t"><b>Kartoitetaan tilanne</b> — lyhyt puhelu, jossa selvitetään laajuus ja aikataulu.</span></div>
-        <div class="step"><span class="n">03</span><span class="t"><b>Aloitetaan</b> — yleensä päivien, ei viikkojen sisällä.</span></div>
+        <div class="step"><span class="n">01</span><span class="t"><b>Ota yhteyttä</b>Kerro lyhyesti, mitä tarvitset ja millä aikataululla.</span></div>
+        <div class="step"><span class="n">02</span><span class="t"><b>Kartoitetaan tilanne</b>Lyhyt puhelu, jossa selvitetään laajuus ja aikataulu.</span></div>
+        <div class="step"><span class="n">03</span><span class="t"><b>Aloitetaan</b>Yleensä päivien, ei viikkojen sisällä.</span></div>
       </div>
     </div>
 
     <div data-lang-block data-lang="pl">
-      <span class="eyebrow">Jak to działa</span>
-      <h2>Trzy kroki do startu</h2>
+      <div class="section-head"><span class="eyebrow">Jak to działa</span><h2>Trzy kroki do startu</h2></div>
       <div class="steps">
-        <div class="step"><span class="n">01</span><span class="t"><b>Napisz lub zadzwoń</b> — krótko opisz, czego potrzebujesz i w jakim terminie.</span></div>
-        <div class="step"><span class="n">02</span><span class="t"><b>Ustalamy zakres</b> — krótka rozmowa o skali i harmonogramie.</span></div>
-        <div class="step"><span class="n">03</span><span class="t"><b>Zaczynamy działać</b> — zwykle w ciągu dni, nie tygodni.</span></div>
+        <div class="step"><span class="n">01</span><span class="t"><b>Napisz lub zadzwoń</b>Krótko opisz, czego potrzebujesz i w jakim terminie.</span></div>
+        <div class="step"><span class="n">02</span><span class="t"><b>Ustalamy zakres</b>Krótka rozmowa o skali i harmonogramie.</span></div>
+        <div class="step"><span class="n">03</span><span class="t"><b>Zaczynamy działać</b>Zwykle w ciągu dni, nie tygodni.</span></div>
       </div>
     </div>
 
     <div data-lang-block data-lang="en">
-      <span class="eyebrow">How it works</span>
-      <h2>Three steps to get moving</h2>
+      <div class="section-head"><span class="eyebrow">How it works</span><h2>Three steps to get moving</h2></div>
       <div class="steps">
-        <div class="step"><span class="n">01</span><span class="t"><b>Reach out</b> — tell me briefly what you need and by when.</span></div>
-        <div class="step"><span class="n">02</span><span class="t"><b>We map it</b> — a short call to understand scope and timing.</span></div>
-        <div class="step"><span class="n">03</span><span class="t"><b>We get moving</b> — usually within days, not weeks.</span></div>
+        <div class="step"><span class="n">01</span><span class="t"><b>Reach out</b>Tell me briefly what you need and by when.</span></div>
+        <div class="step"><span class="n">02</span><span class="t"><b>We map it</b>A short call to understand scope and timing.</span></div>
+        <div class="step"><span class="n">03</span><span class="t"><b>We get moving</b>Usually within days, not weeks.</span></div>
       </div>
     </div>
 
@@ -521,53 +672,59 @@
   <div class="wrap">
 
     <div data-lang-block data-lang="fi">
-      <span class="eyebrow" style="color:#F2C9A8;">Ota yhteyttä</span>
-      <h2>Jutellaan.</h2>
-      <p class="lead">Muutto, kauppa vai suomalainen byrokratia? Kerro, mikä sinulla on edessä. Vastaan nopeasti.</p>
-      <div class="contact-info">
-        <span>PUHELIN — +358 40 850 2686 / +48 570 257 370</span>
-        <span>SÄHKÖPOSTI — eeva.piiroinen@gmail.com</span>
-      </div>
-      <div class="cta-row">
-        <a href="mailto:eeva.piiroinen@gmail.com" class="btn-primary" style="display:inline-block; text-decoration:none;">Lähetä viesti</a>
-        <a href="https://wa.me/358408502686?text=Hei%20Eeva%2C%20l%C3%B6ysin%20sivusi%20ja%20haluaisin%20kysy%C3%A4%20lis%C3%A4%C3%A4." target="_blank" class="btn-whatsapp">
-          <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.001 3C9.096 3 3.5 8.596 3.5 15.5c0 2.44.696 4.72 1.9 6.65L3 29l7.03-2.35a12.44 12.44 0 0 0 5.97 1.52h.005c6.905 0 12.5-5.596 12.5-12.5S22.906 3 16.001 3zm0 22.7h-.004a10.2 10.2 0 0 1-5.2-1.42l-.373-.222-3.87 1.29 1.31-3.77-.243-.388a10.2 10.2 0 0 1-1.56-5.49c0-5.64 4.59-10.23 10.24-10.23 2.735 0 5.305 1.065 7.24 3s3 4.505 3 7.24c-.001 5.64-4.59 10.99-10.54 9.99zm5.61-7.63c-.307-.154-1.82-.9-2.1-1-.28-.104-.484-.154-.688.153-.204.307-.79 1-.968 1.205-.178.204-.356.23-.663.077-.307-.153-1.297-.478-2.47-1.523-.913-.814-1.53-1.82-1.708-2.127-.178-.307-.02-.472.135-.625.138-.138.307-.357.46-.535.154-.178.204-.307.307-.51.103-.204.05-.383-.026-.536-.077-.154-.688-1.658-.943-2.27-.248-.596-.5-.516-.688-.526-.178-.008-.383-.01-.588-.01s-.536.077-.817.383c-.28.307-1.07 1.046-1.07 2.55 0 1.503 1.096 2.957 1.25 3.16.153.204 2.157 3.293 5.226 4.618.73.315 1.3.503 1.744.645.733.233 1.4.2 1.927.121.588-.088 1.82-.744 2.077-1.462.256-.717.256-1.332.18-1.462-.078-.13-.283-.204-.59-.357z"/></svg>
-          WhatsApp
-        </a>
+      <div class="contact-grid">
+        <div>
+          <span class="eyebrow">Ota yhteyttä</span>
+          <h2>Jutellaan.</h2>
+          <p class="lead">Muutto, kauppa vai suomalainen byrokratia? Kerro, mikä sinulla on edessä. Vastaan nopeasti.</p>
+          <div class="cta-row">
+            <a href="mailto:eeva.piiroinen@gmail.com" class="btn-primary">Lähetä viesti</a>
+            <a href="https://wa.me/358408502686?text=Hei%20Eeva%2C%20l%C3%B6ysin%20sivusi%20ja%20haluaisin%20kysy%C3%A4%20lis%C3%A4%C3%A4." target="_blank" rel="noopener" class="btn-whatsapp"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><use href="#wa"/></svg>WhatsApp</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="c-row"><span class="k">Puhelin</span><a href="tel:+358408502686">+358 40 850 2686<span class="flag fi">FI</span></a></div>
+          <div class="c-row"><span class="k">Puhelin</span><a href="tel:+48570257370">+48 570 257 370<span class="flag pl">PL</span></a></div>
+          <div class="c-row"><span class="k">Sähköposti</span><a href="mailto:eeva.piiroinen@gmail.com">eeva.piiroinen@gmail.com</a></div>
+        </div>
       </div>
     </div>
 
     <div data-lang-block data-lang="pl">
-      <span class="eyebrow" style="color:#F2C9A8;">Kontakt</span>
-      <h2>Porozmawiajmy.</h2>
-      <p class="lead">Przeprowadzka, transakcja czy fińska biurokracja? Napisz, z czym się mierzysz. Odpowiadam szybko.</p>
-      <div class="contact-info">
-        <span>TELEFON — +358 40 850 2686 / +48 570 257 370</span>
-        <span>EMAIL — eeva.piiroinen@gmail.com</span>
-      </div>
-      <div class="cta-row">
-        <a href="mailto:eeva.piiroinen@gmail.com" class="btn-primary" style="display:inline-block; text-decoration:none;">Wyślij wiadomość</a>
-        <a href="https://wa.me/358408502686?text=Cze%C5%9B%C4%87%20Eeva%2C%20znalaz%C5%82em%20Twoj%C4%85%20stron%C4%99%20i%20chcia%C5%82bym%20zapyta%C4%87%20o%20wi%C4%99cej." target="_blank" class="btn-whatsapp">
-          <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.001 3C9.096 3 3.5 8.596 3.5 15.5c0 2.44.696 4.72 1.9 6.65L3 29l7.03-2.35a12.44 12.44 0 0 0 5.97 1.52h.005c6.905 0 12.5-5.596 12.5-12.5S22.906 3 16.001 3zm0 22.7h-.004a10.2 10.2 0 0 1-5.2-1.42l-.373-.222-3.87 1.29 1.31-3.77-.243-.388a10.2 10.2 0 0 1-1.56-5.49c0-5.64 4.59-10.23 10.24-10.23 2.735 0 5.305 1.065 7.24 3s3 4.505 3 7.24c-.001 5.64-4.59 10.99-10.54 9.99zm5.61-7.63c-.307-.154-1.82-.9-2.1-1-.28-.104-.484-.154-.688.153-.204.307-.79 1-.968 1.205-.178.204-.356.23-.663.077-.307-.153-1.297-.478-2.47-1.523-.913-.814-1.53-1.82-1.708-2.127-.178-.307-.02-.472.135-.625.138-.138.307-.357.46-.535.154-.178.204-.307.307-.51.103-.204.05-.383-.026-.536-.077-.154-.688-1.658-.943-2.27-.248-.596-.5-.516-.688-.526-.178-.008-.383-.01-.588-.01s-.536.077-.817.383c-.28.307-1.07 1.046-1.07 2.55 0 1.503 1.096 2.957 1.25 3.16.153.204 2.157 3.293 5.226 4.618.73.315 1.3.503 1.744.645.733.233 1.4.2 1.927.121.588-.088 1.82-.744 2.077-1.462.256-.717.256-1.332.18-1.462-.078-.13-.283-.204-.59-.357z"/></svg>
-          WhatsApp
-        </a>
+      <div class="contact-grid">
+        <div>
+          <span class="eyebrow">Kontakt</span>
+          <h2>Porozmawiajmy.</h2>
+          <p class="lead">Przeprowadzka, transakcja czy fińska biurokracja? Napisz, z czym się mierzysz. Odpowiadam szybko.</p>
+          <div class="cta-row">
+            <a href="mailto:eeva.piiroinen@gmail.com" class="btn-primary">Wyślij wiadomość</a>
+            <a href="https://wa.me/358408502686?text=Cze%C5%9B%C4%87%20Eeva%2C%20znalaz%C5%82em%20Twoj%C4%85%20stron%C4%99%20i%20chcia%C5%82bym%20zapyta%C4%87%20o%20wi%C4%99cej." target="_blank" rel="noopener" class="btn-whatsapp"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><use href="#wa"/></svg>WhatsApp</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="c-row"><span class="k">Telefon</span><a href="tel:+358408502686">+358 40 850 2686<span class="flag fi">FI</span></a></div>
+          <div class="c-row"><span class="k">Telefon</span><a href="tel:+48570257370">+48 570 257 370<span class="flag pl">PL</span></a></div>
+          <div class="c-row"><span class="k">Email</span><a href="mailto:eeva.piiroinen@gmail.com">eeva.piiroinen@gmail.com</a></div>
+        </div>
       </div>
     </div>
 
     <div data-lang-block data-lang="en">
-      <span class="eyebrow" style="color:#F2C9A8;">Get in touch</span>
-      <h2>Let's talk.</h2>
-      <p class="lead">Moving, closing a deal, or Finnish bureaucracy? Tell me what's in front of you. I reply quickly.</p>
-      <div class="contact-info">
-        <span>PHONE — +358 40 850 2686 / +48 570 257 370</span>
-        <span>EMAIL — eeva.piiroinen@gmail.com</span>
-      </div>
-      <div class="cta-row">
-        <a href="mailto:eeva.piiroinen@gmail.com" class="btn-primary" style="display:inline-block; text-decoration:none;">Send a message</a>
-        <a href="https://wa.me/358408502686?text=Hi%20Eeva%2C%20I%20found%20your%20website%20and%20would%20like%20to%20ask%20about%20your%20services." target="_blank" class="btn-whatsapp">
-          <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.001 3C9.096 3 3.5 8.596 3.5 15.5c0 2.44.696 4.72 1.9 6.65L3 29l7.03-2.35a12.44 12.44 0 0 0 5.97 1.52h.005c6.905 0 12.5-5.596 12.5-12.5S22.906 3 16.001 3zm0 22.7h-.004a10.2 10.2 0 0 1-5.2-1.42l-.373-.222-3.87 1.29 1.31-3.77-.243-.388a10.2 10.2 0 0 1-1.56-5.49c0-5.64 4.59-10.23 10.24-10.23 2.735 0 5.305 1.065 7.24 3s3 4.505 3 7.24c-.001 5.64-4.59 10.99-10.54 9.99zm5.61-7.63c-.307-.154-1.82-.9-2.1-1-.28-.104-.484-.154-.688.153-.204.307-.79 1-.968 1.205-.178.204-.356.23-.663.077-.307-.153-1.297-.478-2.47-1.523-.913-.814-1.53-1.82-1.708-2.127-.178-.307-.02-.472.135-.625.138-.138.307-.357.46-.535.154-.178.204-.307.307-.51.103-.204.05-.383-.026-.536-.077-.154-.688-1.658-.943-2.27-.248-.596-.5-.516-.688-.526-.178-.008-.383-.01-.588-.01s-.536.077-.817.383c-.28.307-1.07 1.046-1.07 2.55 0 1.503 1.096 2.957 1.25 3.16.153.204 2.157 3.293 5.226 4.618.73.315 1.3.503 1.744.645.733.233 1.4.2 1.927.121.588-.088 1.82-.744 2.077-1.462.256-.717.256-1.332.18-1.462-.078-.13-.283-.204-.59-.357z"/></svg>
-          WhatsApp
-        </a>
+      <div class="contact-grid">
+        <div>
+          <span class="eyebrow">Get in touch</span>
+          <h2>Let's talk.</h2>
+          <p class="lead">Moving, closing a deal, or Finnish bureaucracy? Tell me what's in front of you. I reply quickly.</p>
+          <div class="cta-row">
+            <a href="mailto:eeva.piiroinen@gmail.com" class="btn-primary">Send a message</a>
+            <a href="https://wa.me/358408502686?text=Hi%20Eeva%2C%20I%20found%20your%20website%20and%20would%20like%20to%20ask%20about%20your%20services." target="_blank" rel="noopener" class="btn-whatsapp"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><use href="#wa"/></svg>WhatsApp</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="c-row"><span class="k">Phone</span><a href="tel:+358408502686">+358 40 850 2686<span class="flag fi">FI</span></a></div>
+          <div class="c-row"><span class="k">Phone</span><a href="tel:+48570257370">+48 570 257 370<span class="flag pl">PL</span></a></div>
+          <div class="c-row"><span class="k">Email</span><a href="mailto:eeva.piiroinen@gmail.com">eeva.piiroinen@gmail.com</a></div>
+        </div>
       </div>
     </div>
 
@@ -575,22 +732,47 @@
   <div class="ribbon"><span class="b"></span><span class="r"></span></div>
 </section>
 
-<div class="foot">
-  <span>FinPol Link — Eeva Piiroinen</span>
-  <span>tinyurl.com/fipolink</span>
-</div>
+<footer class="foot">
+  <div class="foot-inner">
+    <span>© FinPol Link — Eeva Piiroinen</span>
+    <a href="https://tinyurl.com/fipolink">tinyurl.com/fipolink</a>
+  </div>
+</footer>
+
+<a class="fab" href="https://wa.me/358408502686" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><use href="#wa"/></svg></a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 32 32"><path d="M16.001 3C9.096 3 3.5 8.596 3.5 15.5c0 2.44.696 4.72 1.9 6.65L3 29l7.03-2.35a12.44 12.44 0 0 0 5.97 1.52h.005c6.905 0 12.5-5.596 12.5-12.5S22.906 3 16.001 3zm0 22.7h-.004a10.2 10.2 0 0 1-5.2-1.42l-.373-.222-3.87 1.29 1.31-3.77-.243-.388a10.2 10.2 0 0 1-1.56-5.49c0-5.64 4.59-10.23 10.24-10.23 2.735 0 5.305 1.065 7.24 3s3 4.505 3 7.24c-.001 5.64-4.59 10.99-10.54 9.99zm5.61-7.63c-.307-.154-1.82-.9-2.1-1-.28-.104-.484-.154-.688.153-.204.307-.79 1-.968 1.205-.178.204-.356.23-.663.077-.307-.153-1.297-.478-2.47-1.523-.913-.814-1.53-1.82-1.708-2.127-.178-.307-.02-.472.135-.625.138-.138.307-.357.46-.535.154-.178.204-.307.307-.51.103-.204.05-.383-.026-.536-.077-.154-.688-1.658-.943-2.27-.248-.596-.5-.516-.688-.526-.178-.008-.383-.01-.588-.01s-.536.077-.817.383c-.28.307-1.07 1.046-1.07 2.55 0 1.503 1.096 2.957 1.25 3.16.153.204 2.157 3.293 5.226 4.618.73.315 1.3.503 1.744.645.733.233 1.4.2 1.927.121.588-.088 1.82-.744 2.077-1.462.256-.717.256-1.332.18-1.462-.078-.13-.283-.204-.59-.357z"/></symbol>
+</svg>
 
 <script>
   const buttons = document.querySelectorAll('.stamp');
+  const LANGS = ['fi','pl','en'];
   function setLang(lang){
+    if(!LANGS.includes(lang)) lang = 'en';
     document.documentElement.lang = lang;
     document.querySelectorAll('[data-lang-block]').forEach(el=>{
       el.classList.toggle('active', el.getAttribute('data-lang') === lang);
     });
-    buttons.forEach(b=>b.classList.toggle('active', b.dataset.lang === lang));
+    buttons.forEach(b=>{
+      const on = b.dataset.lang === lang;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-pressed', on);
+    });
+    try{ localStorage.setItem('finpol-lang', lang); }catch(e){}
   }
   buttons.forEach(b => b.addEventListener('click', ()=> setLang(b.dataset.lang)));
-  setLang('en');
+
+  // Language: ?lang=pl in the link > last choice > browser language > English
+  (function(){
+    let lang = new URLSearchParams(location.search).get('lang');
+    if(!lang){ try{ lang = localStorage.getItem('finpol-lang'); }catch(e){} }
+    if(!lang){
+      const nav = (navigator.language || 'en').slice(0,2).toLowerCase();
+      lang = LANGS.includes(nav) ? nav : 'en';
+    }
+    setLang(lang);
+  })();
 </script>
 
 </body>
