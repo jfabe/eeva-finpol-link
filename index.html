@@ -346,6 +346,16 @@
 
 
   /* sectors: filled colour tiles */
+  /* growth: sales, strategy, development */
+  .growth{background:var(--paper-dim);}
+  .growth .section-head p{max-width:40em;}
+  .strength-row{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:52px;}
+  .strength-row[data-lang-block].active{display:grid;}
+  @media (max-width:900px){ .strength-row{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .strength-row{grid-template-columns:1fr; gap:10px;} }
+  .strength{background:var(--card); border-radius:10px; padding:22px 22px 24px;}
+  .strength b{display:block; font-family:'Fraunces', serif; font-weight:500; font-size:19px; color:var(--blue-deep); margin-bottom:6px;}
+  .strength span{font-size:14.5px; color:var(--ink-2); line-height:1.55;}
   .sectors{background:var(--paper);}
   .sector-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
   @media (max-width:900px){ .sector-grid{grid-template-columns:repeat(2,1fr);} }
@@ -437,9 +447,9 @@
       FinPol Link
     </a>
     <nav class="nav" aria-label="Main">
-      <div data-lang-block data-lang="fi"><a href="#about">Minusta</a><a href="#services">Palvelut</a><a href="#sectors">Toimialat</a><a href="#life">Arki Suomessa</a><a href="#contact">Yhteystiedot</a></div>
-      <div data-lang-block data-lang="pl"><a href="#about">O mnie</a><a href="#services">Usługi</a><a href="#sectors">Branże</a><a href="#life">Życie w Finlandii</a><a href="#contact">Kontakt</a></div>
-      <div data-lang-block data-lang="en"><a href="#about">About</a><a href="#services">Services</a><a href="#sectors">Sectors</a><a href="#life">Life in Finland</a><a href="#contact">Contact</a></div>
+      <div data-lang-block data-lang="fi"><a href="#about">Minusta</a><a href="#services">Palvelut</a><a href="#growth">Myynti &amp; kehitys</a><a href="#sectors">Toimialat</a><a href="#life">Arki Suomessa</a><a href="#contact">Yhteystiedot</a></div>
+      <div data-lang-block data-lang="pl"><a href="#about">O mnie</a><a href="#services">Usługi</a><a href="#growth">Sprzedaż i rozwój</a><a href="#sectors">Branże</a><a href="#life">Życie w Finlandii</a><a href="#contact">Kontakt</a></div>
+      <div data-lang-block data-lang="en"><a href="#about">About</a><a href="#services">Services</a><a href="#growth">Sales &amp; growth</a><a href="#sectors">Sectors</a><a href="#life">Life in Finland</a><a href="#contact">Contact</a></div>
     </nav>
     <div class="lang-switch" role="group" aria-label="Language">
       <button class="stamp" data-lang="fi" lang="fi">FI</button>
@@ -718,6 +728,58 @@
 </section>
 
 
+<!-- ============ SALES, STRATEGY & DEVELOPMENT ============ -->
+<section class="block growth" id="growth">
+  <div class="wrap">
+
+    <div data-lang-block data-lang="fi">
+      <div class="section-head"><h2>Myynti, strategia ja kehitys</h2><p>Kieli on vasta alku. Autan yrityksiä myymään, kasvamaan ja kehittämään asiakaspalveluaan Suomen, Puolan ja Pohjoismaiden välillä.</p></div>
+      <div class="role-grid" data-lang-block data-lang="fi">
+        <div class="role-card"><h3>Myynti ja asiakassuhteet</h3><p>Hoidan asiakkaan koko polun: tarpeen kartoitus, tarjous, tilauksen seuranta ja reklamaatio ratkaisuun asti. Myyntikokemusta suoraan asiakkaiden kanssa, suomeksi ja puolaksi.</p></div>
+        <div class="role-card"><h3>Strategia ja markkinoille tulo</h3><p>Rakennan puolalaiselle valmistajalle reitin Suomen markkinalle: kohdeasiakkaat, kilpailijat, jälleenmyyjät ja oikea viesti. Esimerkkinä hissien modernisointimarkkina.</p></div>
+        <div class="role-card"><h3>Kehitystyö</h3><p>Kehitän palvelua jatkuvasti: kolmikielinen verkkosivu, tarjouspohjat ja selkeät muistilistat asiakkaille. Uudet digitaaliset työkalut otetaan käyttöön ja asiakkaat opastetaan niihin.</p></div>
+      </div>
+      <div class="strength-row" data-lang-block data-lang="fi">
+        <div class="strength rv"><b>Ennen ja jälkeen kaupan</b><span>Hinta- ja saatavuuskysymykset, tuotevaihtoehdot ja toimitusten seuranta.</span></div>
+        <div class="strength rv"><b>Reklamaatiot hallintaan</b><span>Kirjaus, seuranta ja eskalointi oikealle tiimille, kunnes asia on ratkaistu.</span></div>
+        <div class="strength rv"><b>Tiimit samaan pöytään</b><span>Myynti, tekninen tuki ja logistiikka puhuvat samaa kieltä.</span></div>
+        <div class="strength rv"><b>Tekninen sanasto</b><span>Sähkö, energia, kiinteistötekniikka ja teollisuus.</span></div>
+      </div>
+    </div>
+
+    <div data-lang-block data-lang="pl">
+      <div class="section-head"><h2>Sprzedaż, strategia i rozwój</h2><p>Język to dopiero początek. Pomagam firmom sprzedawać, rosnąć i rozwijać obsługę klienta między Finlandią, Polską i krajami nordyckimi.</p></div>
+      <div class="role-grid" data-lang-block data-lang="pl">
+        <div class="role-card"><h3>Sprzedaż i relacje z klientami</h3><p>Prowadzę klienta przez cały proces: rozpoznanie potrzeb, oferta, śledzenie zamówienia i reklamacja aż do rozwiązania. Doświadczenie w sprzedaży bezpośrednio z klientami, po fińsku i po polsku.</p></div>
+        <div class="role-card"><h3>Strategia i wejście na rynek</h3><p>Buduję dla polskiego producenta drogę na rynek fiński: docelowi klienci, konkurencja, dystrybutorzy i właściwy przekaz. Przykład: rynek modernizacji wind.</p></div>
+        <div class="role-card"><h3>Rozwój</h3><p>Stale rozwijam usługę: trójjęzyczna strona, szablony ofert i jasne listy kontrolne dla klientów. Wdrażam nowe narzędzia cyfrowe i pokazuję klientom, jak z nich korzystać.</p></div>
+      </div>
+      <div class="strength-row" data-lang-block data-lang="pl">
+        <div class="strength rv"><b>Przed i po sprzedaży</b><span>Pytania o cenę i dostępność, dobór produktów i śledzenie dostaw.</span></div>
+        <div class="strength rv"><b>Reklamacje pod kontrolą</b><span>Rejestracja, monitorowanie i eskalacja do właściwego zespołu aż do rozwiązania.</span></div>
+        <div class="strength rv"><b>Zespoły przy jednym stole</b><span>Sprzedaż, wsparcie techniczne i logistyka mówią jednym językiem.</span></div>
+        <div class="strength rv"><b>Słownictwo techniczne</b><span>Elektryka, energetyka, technika budynkowa i przemysł.</span></div>
+      </div>
+    </div>
+
+    <div data-lang-block data-lang="en">
+      <div class="section-head"><h2>Sales, strategy and development</h2><p>Language is only the start. I help companies sell, grow and develop their customer care across Finland, Poland and the Nordics.</p></div>
+      <div class="role-grid" data-lang-block data-lang="en">
+        <div class="role-card"><h3>Sales and customer relationships</h3><p>I handle the full customer journey: needs analysis, offer, order follow-up, and complaints through to resolution. Hands-on sales experience with customers, in Finnish and Polish.</p></div>
+        <div class="role-card"><h3>Strategy and market entry</h3><p>I build a route into the Finnish market for Polish manufacturers: target customers, competitors, distributors and the right message. One example: the lift modernisation market.</p></div>
+        <div class="role-card"><h3>Development</h3><p>I keep improving the service: a trilingual website, offer templates and clear checklists for clients. New digital tools get adopted, and customers are shown how to use them.</p></div>
+      </div>
+      <div class="strength-row" data-lang-block data-lang="en">
+        <div class="strength rv"><b>Pre-sales and after-sales</b><span>Price and availability questions, product alternatives and delivery follow-up.</span></div>
+        <div class="strength rv"><b>Complaints under control</b><span>Logging, follow-up and escalation to the right team until it's resolved.</span></div>
+        <div class="strength rv"><b>Teams at one table</b><span>Sales, technical support and logistics speaking the same language.</span></div>
+        <div class="strength rv"><b>Technical vocabulary</b><span>Electrical, energy, building services and industry.</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- ============ SECTORS ============ -->
 <section class="block sectors" id="sectors">
   <div class="wrap">
@@ -949,7 +1011,7 @@
   const stagger = (sel) => document.querySelectorAll(sel).forEach(group =>
     [...group.children].forEach((el,i) => el.style.setProperty('--i', i)));
   document.querySelectorAll('.sector-grid').forEach(g => [...g.children].forEach((el,i)=> el.style.setProperty('--d', (i%3) + Math.floor(i/3))));
-  stagger('.role-grid'); stagger('.svc-list'); stagger('.life-grid'); stagger('.steps');
+  stagger('.role-grid'); stagger('.strength-row'); stagger('.svc-list'); stagger('.life-grid'); stagger('.steps');
   document.querySelectorAll('.about-text').forEach(t => [...t.children].forEach((p,i)=>{ p.classList.add('rv'); p.style.setProperty('--i', i+1); }));
   document.querySelectorAll('.section-head').forEach(h => [...h.querySelectorAll('h2, p')].forEach((el,i)=>{ el.classList.add('rv'); el.style.setProperty('--i', i); }));
   document.querySelectorAll('.about h2, .pull').forEach((el,i)=>{ el.classList.add('rv'); el.style.setProperty('--i', i+1); });
